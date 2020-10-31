@@ -99,7 +99,11 @@ Write a function newton_sqrt(x) which implements the above algorithm."
 
 # ╔═╡ 4896bf0c-e754-11ea-19dc-1380bb356ab6
 function newton_sqrt(x, error_margin=0.01, a=x / 2) # a=x/2 is the default value of `a`
-	return x # this is wrong, write your code here!
+	newA = (x / a + a) / 2
+	if abs(newA - a) < error_margin
+		return newA
+	end
+	return newton_sqrt(x, error_margin, newA)
 end
 
 # ╔═╡ 7a01a508-e78a-11ea-11da-999d38785348
@@ -182,7 +186,7 @@ end
 md"Just like the definition above, our `sierpinksi` function is _recursive_: it calls itself."
 
 # ╔═╡ 02b9c9d6-e752-11ea-0f32-91b7b6481684
-complexity = 3
+complexity = 5
 
 # ╔═╡ 1eb79812-e7b5-11ea-1c10-63b24803dd8a
 if complexity == 3
@@ -216,7 +220,10 @@ area_sierpinski(1) = 0.??
 
 # ╔═╡ ca8d2f72-e7b6-11ea-1893-f1e6d0a20dc7
 function area_sierpinski(n)
-	return 1.0
+	if n == 0
+		return 1.0
+	end
+	return (3 / 4)^n
 end
 
 # ╔═╡ 71c78614-e7bc-11ea-0959-c7a91a10d481
@@ -330,7 +337,7 @@ has area **$(area_sierpinski(n))**
 # ╠═5acd58e0-e856-11ea-2d3d-8329889fe16f
 # ╟─dbc4da6a-e7b4-11ea-3b70-6f2abfcab992
 # ╠═e2848b9a-e703-11ea-24f9-b9131434a84b
-# ╠═9664ac52-e750-11ea-171c-e7d57741a68c
+# ╟─9664ac52-e750-11ea-171c-e7d57741a68c
 # ╠═02b9c9d6-e752-11ea-0f32-91b7b6481684
 # ╟─1eb79812-e7b5-11ea-1c10-63b24803dd8a
 # ╟─d7e8202c-e7b5-11ea-30d3-adcd6867d5f5
